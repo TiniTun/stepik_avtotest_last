@@ -20,3 +20,9 @@ class ProductPage(BasePage):
         assert self.is_element_present(*ProductPageLocator.COST), "Cost book is not presented"
         cost_book = self.browser.find_element(*ProductPageLocator.COST)
         assert card_cost_book.text == cost_book.text, f"Cost book incorrect: add card - {card_cost_book}, at page - {cost_book}"
+
+    def should_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocator.CARD_NAME_BOOK), "Success message is presented"
+
+    def should_be_success_message_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocator.CARD_NAME_BOOK), "Success message is disappeared"
