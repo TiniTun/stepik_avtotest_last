@@ -1,5 +1,7 @@
 from pages.base_page import BasePage
 from pages.locators import LoginPageLocators
+import time
+import base64
 
 
 class LoginPage(BasePage):
@@ -32,3 +34,11 @@ class LoginPage(BasePage):
 
         button_reg = self.browser.find_element(*LoginPageLocators.REG_BUTTON)
         button_reg.click()
+
+    def make_login_pass(self):
+        email = str(time.time()) + "@fakemail.org"
+        message_bytes = email.encode('ascii')
+        base64_bytes = base64.b64encode(message_bytes)
+        base64_message = base64_bytes.decode('ascii')
+        password = base64_message[:9]
+        return (email, password)
